@@ -1,55 +1,99 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
 export default function Dashboard() {
-  // Mock data for the dashboard UI
-  const tasks = [
-    { id: 1, title: 'Record Act 1 - Resident Evil Requiem', complexity: 'High', deadline: 'Today, 8:00 PM', done: false },
-    { id: 2, title: 'Edit Cold Open (30s)', complexity: 'Medium', deadline: 'Today, 10:00 PM', done: false },
-    { id: 3, title: 'Draft Thumbnail Concept for RE9', complexity: 'Low', deadline: 'Tomorrow, 7:00 PM', done: false },
-  ];
+  const [savedIdeas, setSavedIdeas] = useState([]);
+  const [strategy, setStrategy] = useState(null);
+
+  useEffect(() => {
+    const ideas = localStorage.getItem('gourab_saved_ideas');
+    if (ideas) setSavedIdeas(JSON.parse(ideas));
+
+    const strat = localStorage.getItem('gourab_strategy');
+    if (strat) setStrategy(JSON.parse(strat));
+  }, []);
 
   return (
     <div>
       <div className="header">
-        <h2>Welcome back, Gourab.</h2>
-        <p>Your automated tasks for today have been generated. It's time to create.</p>
+        <h2>Dashboard</h2>
+        <p>Your automated system status and priority tasks.</p>
       </div>
 
-      <div className="dashboard-grid">
+      <div className="stats-grid">
         <div className="card glass">
-          <h3>
-            Today's Tasks
-            <span className="tag" style={{ background: 'rgba(99, 102, 241, 0.2)', color: '#a5b4fc' }}>Active</span>
-          </h3>
-          <div className="task-list">
-            {tasks.map(task => (
-              <div key={task.id} className="task-item">
-                <input type="checkbox" className="task-checkbox" defaultChecked={task.done} />
-                <div className="task-content">
-                  <div className="task-title">{task.title}</div>
-                  <div className="task-meta">
-                    <span className="tag" style={{ marginRight: '8px' }}>{task.complexity}</span>
-                    Deadline: {task.deadline}
+          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Saved Concepts</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--primary)', marginTop: '8px' }}>
+            {savedIdeas.length}
+          </p>
+        </div>
+        <div className="card glass">
+          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Current Strategy</h3>
+          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: strategy ? 'var(--success)' : 'var(--danger)', marginTop: '8px' }}>
+            {strategy ? "Active" : "Not Set"}
+          </p>
+        </div>
+        <div className="card glass">
+          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Brand Persona</h3>
+          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--accent)', marginTop: '8px' }}>
+            "Live The Game" (Bind)
+          </p>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+        <div className="card glass">
+          <h3 style={{ marginBottom: '24px' }}>Today's Priority Focus</h3>
+          
+          {strategy ? (
+            <div style={{ background: 'rgba(56, 189, 248, 0.05)', borderLeft: '4px solid var(--primary)', padding: '24px', borderRadius: '8px', marginBottom: '24px' }}>
+              <h4 style={{ color: 'var(--primary)', marginBottom: '8px' }}>Monthly Objective:</h4>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{strategy.currentFocus}</p>
+            </div>
+          ) : (
+             <div style={{ background: 'rgba(239, 68, 68, 0.05)', padding: '24px', borderRadius: '8px', marginBottom: '24px' }}>
+              <p style={{ color: 'var(--text-secondary)' }}>You don't have a strategy set yet. <Link href="/strategy" style={{color: 'var(--primary)'}}>Generate one here.</Link></p>
+            </div>
+          )}
+
+          <h4 style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>Your Saved Ideas Ready for Production:</h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {savedIdeas.length === 0 ? (
+              <p style={{ color: 'var(--text-secondary)' }}>No ideas saved. <Link href="/ideas" style={{color: 'var(--primary)'}}>Go generate some concepts.</Link></p>
+            ) : (
+              savedIdeas.slice(0, 3).map(idea => (
+                <div key={idea.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', background: 'var(--background)', borderRadius: '8px', border: '1px solid var(--surface-border)' }}>
+                  <div>
+                    <h5 style={{ color: 'var(--text-primary)', fontSize: '1rem', marginBottom: '4px' }}>{idea.title}</h5>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{idea.searchKeyword}</p>
                   </div>
+                  <button className="btn" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>Start Script</button>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
-          <button className="btn" style={{ width: '100%', marginTop: '20px' }}>Mark Day Complete</button>
         </div>
 
         <div className="card glass">
-          <h3>Channel North Star</h3>
-          <p style={{ lineHeight: '1.6', color: 'var(--text-secondary)' }}>
-            "Main ek banda hoon jo games se pyaar karta hai par time nahi hai. Jab bhi time milta hai — woh experience real hota hai. Yeh channel usi realness ke baare mein hai."
-          </p>
-          <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(0,0,0,0.2)', borderRadius: '8px' }}>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>Current Series</div>
-            <div style={{ fontWeight: '600' }}>Resident Evil Requiem</div>
-            <div style={{ width: '100%', height: '6px', background: 'var(--surface)', borderRadius: '3px', marginTop: '8px' }}>
-              <div style={{ width: '40%', height: '100%', background: 'var(--accent)', borderRadius: '3px' }}></div>
+          <h3 style={{ marginBottom: '24px' }}>System Logs</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <span style={{ color: 'var(--success)', marginRight: '8px' }}>●</span>
+              System Online - Awaiting 6 PM Trigger
+            </div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <span style={{ color: 'var(--success)', marginRight: '8px' }}>●</span>
+              Gemini AI Connected (3.5-flash)
+            </div>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              <span style={{ color: 'var(--success)', marginRight: '8px' }}>●</span>
+              YouTube Data API Synced
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

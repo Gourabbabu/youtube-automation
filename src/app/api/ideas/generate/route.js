@@ -7,14 +7,14 @@ export async function POST(request) {
   try {
     const prompt = `
       You are the AI brain for Gourab's Gaming Channel.
-      Based on the brand document (A busy B.Tech CSE professional, calm tone, Hinglish, emotional gaming experience, NOT a walkthrough channel), 
-      generate 3 video ideas for the 'Resident Evil Requiem' series or general 'Developer Ki Nazar Se' pillar.
+      Based on the brand document (A busy guy who misses gaming, wants to not just love but live games. Think of the channel 'Bind'. Pure immersion, heavy emotional connection, escaping the busy life, calm tone, Hinglish, NO developer angle, NO walkthroughs), 
+      generate 3 video ideas for story-driven or immersive games.
       
       For each idea, provide a detailed analysis:
       1. title: Title in Hinglish (e.g., 'Game Name — Hook | Hindi/Hinglish')
-      2. concept: The core narrative and personal angle of the video.
+      2. concept: The core narrative and personal emotional angle of the video. Focus on the feeling of escaping into the world.
       3. trendAnalysis: Why this specific angle or game moment is trending or highly searched right now.
-      4. competitorAnalysis: What other Indian gaming creators are doing wrong with this topic, and how your calm/developer approach beats them.
+      4. competitorAnalysis: What other Indian gaming creators are doing wrong with this topic (e.g. loud, screaming), and how your calm, immersive approach beats them.
       5. searchKeyword: A short 2-3 word English search term representing this video's core topic (to search YouTube for thumbnail references).
       
       Return as a raw JSON array. Do not include markdown code blocks, just the raw array.
