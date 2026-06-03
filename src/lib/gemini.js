@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function generateText(prompt) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -13,6 +13,6 @@ export async function generateText(prompt) {
     return text;
   } catch (error) {
     console.error("Gemini API Error:", error);
-    throw new Error("Failed to generate content with Gemini API.");
+    throw new Error(`Gemini API Error: ${error.message}`);
   }
 }
