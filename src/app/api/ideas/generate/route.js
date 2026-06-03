@@ -5,16 +5,25 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
   try {
+    const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     const prompt = `
-      You are the AI brain for Gourab's Gaming Channel.
-      Based on the brand document (A busy guy who misses gaming, wants to not just love but live games. Think of the channel 'Bind'. Pure immersion, heavy emotional connection, escaping the busy life, calm tone, Hinglish, NO developer angle, NO walkthroughs), 
-      generate 3 video ideas for story-driven or immersive games.
+      You are the AI brain for an Indian YouTube gaming channel designed to be EXACTLY like '@Bindmove', but in Hindi/Hinglish.
+      
+      Current Date: ${currentDate} 2026. YOU MUST ONLY focus on games relevant RIGHT NOW (recently released in late 2025/2026, or timeless games having a massive current resurgence). Do not suggest stale trends from years ago.
+
+      Brand Identity (@Bindmove India): 
+      - Format: Cinematic, slow-paced, philosophical video essays. 
+      - Vibe: Melancholic, nostalgic, deep emotional resonance. Using video games as a canvas to talk about real life, loneliness, growing up, and human struggles.
+      - Tone: Calm, poetic, reflective Hindi/Hinglish voiceover. Like a late-night conversation with a close friend.
+      - NEVER just review a game or do a walkthrough. Every video is a life lesson disguised as a gaming video.
+      
+      Generate 3 highly specific, highly topical video ideas.
       
       For each idea, provide a detailed analysis:
-      1. title: Title in Hinglish (e.g., 'Game Name — Hook | Hindi/Hinglish')
-      2. concept: The core narrative and personal emotional angle of the video. Focus on the feeling of escaping into the world.
-      3. trendAnalysis: Why this specific angle or game moment is trending or highly searched right now.
-      4. competitorAnalysis: What other Indian gaming creators are doing wrong with this topic (e.g. loud, screaming), and how your calm, immersive approach beats them.
+      1. title: Title in Hinglish (e.g., 'Game Name — Zindagi ka sabse mushkil faisla | A Cinematic Essay')
+      2. concept: The core philosophical and emotional narrative of the video essay. What real-life struggle does this game reflect?
+      3. trendAnalysis: Why this game is highly relevant in ${currentDate} 2026 (e.g., recent DLC, sequel announcement, or current cultural mood).
+      4. competitorAnalysis: How your cinematic, 'Bind-style' philosophical approach will completely stand out against typical loud Indian gaming videos.
       5. searchKeyword: A short 2-3 word English search term representing this video's core topic (to search YouTube for thumbnail references).
       
       Return as a raw JSON array. Do not include markdown code blocks, just the raw array.

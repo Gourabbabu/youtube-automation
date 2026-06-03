@@ -10,17 +10,17 @@ export default function BrandPage() {
         <div className="card glass">
           <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '16px', marginBottom: '16px' }}>Core Promise</h3>
           <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontStyle: 'italic' }}>
-            "Main tumhare saath pehli baar yeh games experience kar raha hoon — honestly, bina kisi script ke feeling ke, bina pretend kiye ki main pro hoon."
+            "I am building the Indian equivalent of @Bindmove. My videos are not just about games—they are philosophical essays about life, loneliness, and growing up, painted over the canvas of beautiful video games."
           </p>
         </div>
 
         <div className="card glass">
           <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '16px', marginBottom: '16px' }}>Tone & Language</h3>
           <ul style={{ color: 'var(--text-secondary)', lineHeight: '1.8', paddingLeft: '16px' }}>
-            <li>Natural conversational Hinglish.</li>
-            <li>Calm, reflective, understated.</li>
-            <li>Closer to a personal diary than a YouTube performance.</li>
-            <li>Never loud, never fake energy (Think Bind).</li>
+            <li>Natural, poetic, and reflective Hinglish.</li>
+            <li>Calm, melancholic, and deeply personal.</li>
+            <li>Closer to a late-night conversation with a friend than a YouTube video.</li>
+            <li>Never loud, never hyperactive. Absolute immersion.</li>
           </ul>
         </div>
 

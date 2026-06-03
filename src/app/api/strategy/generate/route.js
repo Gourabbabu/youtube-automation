@@ -12,13 +12,15 @@ export async function POST(request) {
       ideasContext = "Here are the user's saved favorite video ideas to draw inspiration from:\n" + savedIdeas.map(i => `- ${i.title}: ${i.concept}`).join("\n");
     }
 
+    const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
     const prompt = `
-      You are the AI brain for Gourab's Gaming Channel.
-      Brand Document: A busy guy who misses gaming, wants to not just love but live games. Think of the channel 'Bind'. Pure immersion, heavy emotional connection, escaping the busy life, calm tone, Hinglish. NO developer angle, NO walkthroughs.
+      You are the AI brain for an Indian YouTube gaming channel designed to be EXACTLY like '@Bindmove', but in Hindi/Hinglish.
+      Brand Document: Cinematic, slow-paced, philosophical video essays. Using video games as a canvas to talk about real life, loneliness, growing up, and human struggles. Calm, poetic voiceover. NEVER just review a game or do a walkthrough. Every video is a life lesson.
 
-      Current Context: ${ideasContext}
+      Current Date: ${currentDate} 2026. Focus your strategy on the gaming climate of right now (late 2025/2026 releases or relevant resurgences).
+      Current Context (User's Saved Ideas): ${ideasContext}
 
-      Based on current gaming trends and the brand identity, generate a detailed 30-Day Content Strategy.
+      Based on current 2026 gaming trends and the deeply emotional '@Bindmove' brand identity, generate a detailed 30-Day Content Strategy.
       Return the strategy as a raw JSON object with the following exact structure (no markdown blocks, just raw JSON):
       {
         "currentFocus": "A 1-2 sentence summary of the main goal for this month (e.g. Building emotional connection through story-heavy single-player games).",
