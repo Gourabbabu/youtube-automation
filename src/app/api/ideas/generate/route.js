@@ -29,7 +29,7 @@ export async function POST(request) {
       for (let i = 0; i < ideas.length; i++) {
         const query = ideas[i].searchKeyword || ideas[i].title;
         try {
-          const ytRes = await fetch(\`https://www.googleapis.com/youtube/v3/search?part=snippet&q=\${encodeURIComponent(query)}&type=video&maxResults=3&key=\${youtubeKey}\`);
+          const ytRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=3&key=${youtubeKey}`);
           const ytData = await ytRes.json();
           
           if (ytData.items) {
