@@ -19,7 +19,13 @@ export async function POST(request) {
     `;
 
     const rawResponse = await generateText(prompt);
-    const cleanJson = rawResponse.replace(/```json/g, '').replace(/```/g, '');
+    let cleanJson = rawResponse;
+    const match = rawResponse.match(/\[[\s\S]*\]/);
+    if (match) {
+      cleanJson = match[0];
+    } else {
+      cleanJson = rawResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
+    }
     let ideas = JSON.parse(cleanJson);
 
     // Fetch actual thumbnails for each idea using YouTube Data API

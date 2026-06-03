@@ -4,20 +4,7 @@ import { useState } from 'react';
 
 export default function IdeasPage() {
   const [loading, setLoading] = useState(false);
-  const [ideas, setIdeas] = useState([
-    {
-      id: 1,
-      title: "Resident Evil Requiem — Yeh Game Mujhe Ek Cheez Bhool Nahi Dega | RE9",
-      concept: "Focus on the emotional exhaustion of the mid-game twist where Grace sacrifices her squad. Relate it to the feeling of trying so hard in real life and still failing.",
-      trendAnalysis: "Search volume for 'RE9 ending explained' and 'Grace death scene' is currently peaking. Viewers are actively looking for narrative deep-dives rather than just walkthroughs.",
-      competitorAnalysis: "Most Indian creators are just screaming at the jump scares. No one is sitting down to discuss the actual trauma of the protagonist. Your calm reflection will stand out massively.",
-      referenceThumbnails: [
-        { url: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&q=80", title: "Reference 1" },
-        { url: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&q=80", title: "Reference 2" },
-        { url: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&q=80", title: "Reference 3" }
-      ]
-    }
-  ]);
+  const [ideas, setIdeas] = useState([]);
 
   const generateNewIdeas = async () => {
     setLoading(true);
@@ -28,7 +15,7 @@ export default function IdeasPage() {
         const newIdeas = data.ideas.map((idea, i) => ({ id: Date.now() + i, ...idea }));
         setIdeas([...newIdeas, ...ideas]);
       } else {
-        alert("Make sure you added your GEMINI_API_KEY in Vercel!");
+        alert(`Error from API: ${data.error || 'Failed to parse AI response'}`);
       }
     } catch (err) {
       console.error(err);
@@ -50,6 +37,11 @@ export default function IdeasPage() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+        {ideas.length === 0 && !loading && (
+          <div className="card glass" style={{ textAlign: 'center', padding: '60px' }}>
+            <h3 style={{ color: 'var(--text-secondary)' }}>No ideas yet. Click "Generate Detailed Ideas" to begin!</h3>
+          </div>
+        )}
         {ideas.map((idea) => (
           <div key={idea.id} className="card glass" style={{ padding: '32px' }}>
             <h3 style={{ color: 'var(--text-primary)', fontSize: '1.4rem', borderBottom: '1px solid var(--surface-border)', paddingBottom: '16px', marginBottom: '24px' }}>
