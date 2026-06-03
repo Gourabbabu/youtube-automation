@@ -29,18 +29,13 @@ export default function BrandPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
             
             <div>
-              <h4 style={{ color: 'var(--accent)', marginBottom: '8px' }}>Pillar 1: Game Experience</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>Long-form (15-25m). Personal narrative over curated footage. Honest feeling.</p>
+              <h4 style={{ color: 'var(--accent)', marginBottom: '8px' }}>Pillar 1: Deep Immersion (Long-Form)</h4>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>15-25m videos. Personal narrative over curated footage. Escaping the busy life.</p>
             </div>
             
             <div>
-              <h4 style={{ color: 'var(--accent)', marginBottom: '8px' }}>Pillar 2: Dev Ki Nazar Se</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>CSE background lens. Explaining AI, physics, and design simply in Hinglish.</p>
-            </div>
-
-            <div>
-              <h4 style={{ color: 'var(--accent)', marginBottom: '8px' }}>Pillar 3: Shorts</h4>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>Emotional cutscenes, jump scares. Feeds main channel.</p>
+              <h4 style={{ color: 'var(--accent)', marginBottom: '8px' }}>Pillar 2: Emotional Shorts</h4>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>High-impact cinematic cutscenes, emotional moments. Serves as a gateway to the main channel.</p>
             </div>
 
           </div>
