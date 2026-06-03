@@ -6,10 +6,22 @@ export const dynamic = 'force-dynamic';
 export async function POST(request) {
   try {
     const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const randomThemes = [
+      "indie games with emotional depth (e.g., Firewatch, Hollow Knight, Outer Wilds)",
+      "forgotten AA games or hidden gems",
+      "new releases from 2025/2026",
+      "horror games with psychological depth (e.g., Silent Hill 2 Remake, Alan Wake 2)",
+      "narrative RPGs with difficult choices (e.g., Baldur's Gate 3, Disco Elysium)"
+    ];
+    const randomTheme = randomThemes[Math.floor(Math.random() * randomThemes.length)];
+
     const prompt = `
       You are the AI brain for an Indian YouTube gaming channel designed to be EXACTLY like '@Bindmove', but in Hindi/Hinglish.
       
-      Current Date: ${currentDate} 2026. YOU MUST ONLY focus on games relevant RIGHT NOW (recently released in late 2025/2026, or timeless games having a massive current resurgence). Do not suggest stale trends from years ago.
+      Current Date: ${currentDate} 2026. YOU MUST ONLY focus on games relevant RIGHT NOW. 
+
+      CRITICAL RULE: DO NOT use Red Dead Redemption 2, Cyberpunk 2077, or Ghost of Tsushima. Those are too common.
+      For this specific generation, please focus your ideas around: ${randomTheme}.
 
       Brand Identity (@Bindmove India): 
       - Format: Cinematic, slow-paced, philosophical video essays. 
