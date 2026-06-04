@@ -51,9 +51,24 @@ export default function IdeasPage() {
   const renderIdeaCard = (idea, isSavedTab) => (
     <div key={idea.id} className="card glass" style={{ padding: '32px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--surface-border)', paddingBottom: '16px', marginBottom: '24px' }}>
-        <h3 style={{ color: 'var(--text-primary)', fontSize: '1.4rem', margin: 0 }}>
-          {idea.title}
-        </h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <h3 style={{ color: 'var(--text-primary)', fontSize: '1.4rem', margin: 0 }}>
+            {idea.title}
+          </h3>
+          {idea.predictionScore && (
+            <span style={{ 
+              background: idea.predictionScore.includes('High') ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)', 
+              color: idea.predictionScore.includes('High') ? 'var(--success)' : 'var(--warning)', 
+              padding: '4px 12px', 
+              borderRadius: '16px', 
+              fontSize: '0.8rem', 
+              fontWeight: 'bold',
+              border: `1px solid ${idea.predictionScore.includes('High') ? 'var(--success)' : 'var(--warning)'}` 
+            }}>
+              Score: {idea.predictionScore}
+            </span>
+          )}
+        </div>
         {isSavedTab ? (
           <button className="btn" style={{ background: 'var(--danger)' }} onClick={() => removeIdea(idea.id)}>Delete</button>
         ) : (
