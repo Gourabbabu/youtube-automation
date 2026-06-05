@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
             </div>
             <nav className="nav-links">
               <Link href="/" className="nav-link">Dashboard</Link>
+              <Link href="/keyword-explorer" className="nav-link" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>🔍 Keyword Explorer</Link>
               <Link href="/ideas" className="nav-link">Video Ideas</Link>
               <Link href="/strategy" className="nav-link">Monthly Strategy</Link>
               <Link href="/brand" className="nav-link">Brand Identity</Link>
