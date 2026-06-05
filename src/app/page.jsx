@@ -3,7 +3,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import { useSession, signIn, signOut } from "next-auth/react";
+
 export default function Dashboard() {
+  const { data: session } = useSession();
   const [savedIdeas, setSavedIdeas] = useState([]);
   const [strategy, setStrategy] = useState(null);
 
@@ -17,9 +20,26 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="header">
-        <h2>Dashboard</h2>
-        <p>Your automated system status and priority tasks.</p>
+      <div className="header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h2>Dashboard</h2>
+          <p>Your automated system status and priority tasks.</p>
+        </div>
+        <div>
+          {session ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ textAlign: 'right' }}>
+                <p style={{ margin: 0, fontWeight: 'bold' }}>{session.user?.name}</p>
+                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--success)' }}>Channel Connected</p>
+              </div>
+              <button className="btn" style={{ background: 'var(--danger)' }} onClick={() => signOut()}>Disconnect</button>
+            </div>
+          ) : (
+            <button className="btn" style={{ background: 'var(--primary)', color: 'black' }} onClick={() => signIn("google")}>
+              Connect YouTube Channel
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="stats-grid">
