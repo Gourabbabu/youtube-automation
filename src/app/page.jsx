@@ -35,7 +35,7 @@ export default function Dashboard() {
               <button className="btn" style={{ background: 'var(--danger)' }} onClick={() => signOut()}>Disconnect</button>
             </div>
           ) : (
-            <button className="btn" style={{ background: 'var(--primary)', color: 'black' }} onClick={() => signIn("google")}>
+            <button className="btn" onClick={() => signIn("google")}>
               Connect YouTube Channel
             </button>
           )}
