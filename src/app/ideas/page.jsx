@@ -8,11 +8,16 @@ export default function IdeasPage() {
   const [ideas, setIdeas] = useState([]);
   const [savedIdeas, setSavedIdeas] = useState([]);
 
-  // Load saved ideas from Local Storage on mount
+  // Load saved ideas from Local Storage and generated from Session Storage on mount
   useEffect(() => {
-    const stored = localStorage.getItem('gourab_saved_ideas');
-    if (stored) {
-      setSavedIdeas(JSON.parse(stored));
+    const storedSaved = localStorage.getItem('gourab_saved_ideas');
+    if (storedSaved) {
+      setSavedIdeas(JSON.parse(storedSaved));
+    }
+    
+    const storedGenerated = sessionStorage.getItem('gourab_generated_ideas');
+    if (storedGenerated) {
+      setIdeas(JSON.parse(storedGenerated));
     }
   }, []);
 
@@ -38,6 +43,7 @@ export default function IdeasPage() {
       if (data.success && data.ideas) {
         const newIdeas = data.ideas.map((idea, i) => ({ id: Date.now() + i, ...idea }));
         setIdeas(newIdeas); // Replace instead of append for clean view
+        sessionStorage.setItem('gourab_generated_ideas', JSON.stringify(newIdeas));
       } else {
         alert(`Error from API: ${data.error || 'Failed to parse AI response'}`);
       }

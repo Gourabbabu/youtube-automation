@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 
 export default function KeywordExplorer() {
@@ -8,6 +8,13 @@ export default function KeywordExplorer() {
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
+
+  useEffect(() => {
+    const storedKeyword = sessionStorage.getItem('vidiq_keyword');
+    const storedResults = sessionStorage.getItem('vidiq_results');
+    if (storedKeyword) setKeyword(storedKeyword);
+    if (storedResults) setResults(JSON.parse(storedResults));
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -23,6 +30,8 @@ export default function KeywordExplorer() {
       });
       const data = await response.json();
       setResults(data);
+      sessionStorage.setItem('vidiq_keyword', keyword);
+      sessionStorage.setItem('vidiq_results', JSON.stringify(data));
     } catch (error) {
       console.error("Error analyzing keyword", error);
     }
